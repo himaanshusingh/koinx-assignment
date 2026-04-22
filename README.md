@@ -2,7 +2,7 @@
 
 A premium, interactive cryptocurrency tax management application designed to help users visualize their capital gains and optimize their tax positions through strategic harvesting.
 
-![KoinX Dashboard](https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1200&auto=format&fit=crop)
+![KoinX Dashboard](https://github.com/himaanshusingh/coinx-assignment/blob/main/public/preview.jpg)
 
 ## 🚀 Key Features
 
@@ -11,9 +11,9 @@ A premium, interactive cryptocurrency tax management application designed to hel
 - **Automated Tax Reduction Note**: A smart notification logic that identifies when you've successfully offset capital gains with harvested losses.
 - **Dynamic Summaries**: Comparative view between "Pre Harvesting" and "After Harvesting" states with detailed short-term and long-term breakdowns.
 - **Premium Aesthetics**:
-    - **Dark Mode First**: Sleek, cinematic dark theme optimized for financial data.
-    - **Glassmorphism**: Modern UI elements with subtle transparency and border-glows.
-    - **Responsive Design**: Fluid layouts that work seamlessly across desktop, tablet, and mobile.
+  - **Dark Mode First**: Sleek, cinematic dark theme optimized for financial data.
+  - **Glassmorphism**: Modern UI elements with subtle transparency and border-glows.
+  - **Responsive Design**: Fluid layouts that work seamlessly across desktop, tablet, and mobile.
 - **Lightweight Architecture**: built with React Context API for high performance without heavy external state libraries.
 
 ## 🛠️ Tech Stack
@@ -34,12 +34,14 @@ A premium, interactive cryptocurrency tax management application designed to hel
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd koinx
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
