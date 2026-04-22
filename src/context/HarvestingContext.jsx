@@ -49,17 +49,17 @@ export const HarvestingProvider = ({ children }) => {
     const afterProfitsLong = initialState.profitsLong + selectedLTCGProfit;
     const afterLossesLong = initialState.lossesLong + selectedLTCGLoss;
 
-    // Realised Capital Gains (shown as loss in UI)
-    // netShort = Losses - Profits
-    const netShort = afterLossesShort - afterProfitsShort;
-    const netLong = afterLossesLong - afterProfitsLong;
+    // Realised Capital Gains (Profits - Losses)
+    // Positive = Gain, Negative = Loss
+    const netShort = afterProfitsShort - afterLossesShort;
+    const netLong = afterProfitsLong - afterLossesLong;
 
     return {
       pre: {
         ...initialState,
-        netShort: initialState.lossesShort - initialState.profitsShort,
-        netLong: initialState.lossesLong - initialState.profitsLong,
-        total: (initialState.lossesShort - initialState.profitsShort) + (initialState.lossesLong - initialState.profitsLong)
+        netShort: initialState.profitsShort - initialState.lossesShort,
+        netLong: initialState.profitsLong - initialState.lossesLong,
+        total: (initialState.profitsShort - initialState.lossesShort) + (initialState.profitsLong - initialState.lossesLong)
       },
       after: {
         profitsShort: afterProfitsShort,
@@ -72,6 +72,7 @@ export const HarvestingProvider = ({ children }) => {
         harvestedSavings: selectedSTCGLoss + selectedLTCGLoss
       }
     };
+
   }, [selectedHoldings]);
 
 

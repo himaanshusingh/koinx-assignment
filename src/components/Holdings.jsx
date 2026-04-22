@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import holdingsData from "../data/holdingsData.json";
 import { useHarvesting } from "../context/HarvestingContext";
 
@@ -17,6 +18,7 @@ const formatNumber = (value) =>
 const Holdings = () => {
   const [holdings, setHoldings] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [sortOrder, setSortOrder] = useState("none"); // "none", "desc", "asc"
   const { selectedHoldings, toggleHolding } = useHarvesting();
 
   useEffect(() => {
@@ -29,7 +31,25 @@ const Holdings = () => {
     loadData();
   }, []);
 
-  const visibleHoldings = showAll ? holdings : holdings.slice(0, 4);
+  const handleSort = () => {
+    setSortOrder((prev) => {
+      if (prev === "none") return "desc";
+      if (prev === "desc") return "asc";
+      return "none";
+    });
+  };
+
+  const sortedHoldings = useMemo(() => {
+    if (sortOrder === "none") return holdings;
+
+    return [...holdings].sort((a, b) => {
+      const valA = a.stcg.gain;
+      const valB = b.stcg.gain;
+      return sortOrder === "desc" ? valB - valA : valA - valB;
+    });
+  }, [holdings, sortOrder]);
+
+  const visibleHoldings = showAll ? sortedHoldings : sortedHoldings.slice(0, 4);
 
   const isSelected = (item) => {
     return selectedHoldings.some(
@@ -49,7 +69,14 @@ const Holdings = () => {
           <div>Asset</div>
           <div className="text-center">Holdings</div>
           <div className="text-center">Current Price</div>
-          <div className="text-center">Short-Term</div>
+          <div
+            onClick={handleSort}
+            className="text-center cursor-pointer hover:text-white transition-colors flex items-center justify-center gap-1 select-none"
+          >
+            Short-Term
+            {sortOrder === "desc" && <ChevronDown size={14} className="text-blue-400" />}
+            {sortOrder === "asc" && <ChevronUp size={14} className="text-blue-400" />}
+          </div>
           <div className="text-center">Long-Term</div>
         </div>
 
@@ -141,4 +168,5 @@ const Holdings = () => {
 };
 
 export default Holdings;
+
 

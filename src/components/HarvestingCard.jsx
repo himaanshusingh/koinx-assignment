@@ -2,7 +2,6 @@ import React from "react";
 import { useHarvesting } from "../context/HarvestingContext";
 
 const formatCompactCurrency = (value) => {
-  if (value === 28077.55) return `-$${value}`;
   const abs = Math.abs(value);
 
   if (abs >= 1_000_000) {
@@ -68,7 +67,6 @@ const HarvestingSummaryCard = ({
   const tooltipValue = type === "after" ? data.total : (pTooltipValue ?? totalValue);
   
   // Logic for the note
-  // If selected short-term gains are in loss, show note.
   // In our context, harvestedSavings reflects the sum of losses selected.
   const harvestedSavings = summary.after.harvestedSavings;
   const displayNote = type === "after" && harvestedSavings > 0;
@@ -77,7 +75,7 @@ const HarvestingSummaryCard = ({
 
   return (
     <div
-      className={`w-full rounded-2xl p-5 text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] sm:p-6 ${bgClass}`}
+      className={`w-full rounded-2xl p-5 text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] sm:p-6 transition-all duration-500 ${bgClass}`}
     >
       <h2 className="text-2xl font-semibold">{title}</h2>
 
@@ -87,16 +85,28 @@ const HarvestingSummaryCard = ({
         <div className="text-center font-medium text-white/85">Long-term</div>
 
         <div className="font-medium">Profits</div>
-        <div className="text-center">${profitsShort.toLocaleString()}</div>
-        <div className="text-center">{formatCompactCurrency(profitsLong)}</div>
+        <div className="text-center transition-all duration-300">
+          ${profitsShort.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        </div>
+        <div className="text-center transition-all duration-300">
+          {formatCompactCurrency(profitsLong)}
+        </div>
 
         <div className="font-medium">Losses</div>
-        <div className="text-center">${lossesShort.toLocaleString()}</div>
-        <div className="text-center">{formatCompactCurrency(lossesLong)}</div>
+        <div className="text-center transition-all duration-300">
+          ${lossesShort.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        </div>
+        <div className="text-center transition-all duration-300">
+          {formatCompactCurrency(lossesLong)}
+        </div>
 
         <div className="font-medium">Net Capital Gains</div>
-        <div className="text-center">-${netShort.toLocaleString()}</div>
-        <div className="text-center">{formatCompactCurrency(netLong)}</div>
+        <div className="text-center transition-all duration-300">
+          {formatCompactCurrency(netShort)}
+        </div>
+        <div className="text-center transition-all duration-300">
+          {formatCompactCurrency(netLong)}
+        </div>
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-3 text-2xl font-semibold">
@@ -104,7 +114,7 @@ const HarvestingSummaryCard = ({
 
         {showTooltip ? (
           <div className="relative group inline-flex items-center">
-            <span className="cursor-default">
+            <span className="cursor-default transition-all duration-300">
               {formatCompactCurrency(totalValue)}
             </span>
 
@@ -114,21 +124,25 @@ const HarvestingSummaryCard = ({
             </div>
           </div>
         ) : (
-          <span>{formatCompactCurrency(totalValue)}</span>
+          <span className="transition-all duration-300">
+            {formatCompactCurrency(totalValue)}
+          </span>
         )}
       </div>
 
       {(showNote || displayNote) && (
-        <p className="mt-6 text-base text-white/90 sm:text-2xl">
+        <p className="mt-6 text-base text-white/90 sm:text-2xl animate-slide-down">
           {displayNote ? note : pNote}
           <span className="font-semibold ml-2">
             {formatCompactCurrency(displayNote ? noteValue : pNoteValue)}
           </span>
         </p>
       )}
+
     </div>
   );
 };
+
 
 export default HarvestingSummaryCard;
 
