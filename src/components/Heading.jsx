@@ -2,7 +2,7 @@ import React from "react";
 
 const Heading = () => {
   return (
-    <div className="mb-5 flex flex-col gap-4 pb-1 sm:flex-row sm:items-center sm:gap-10">
+    <div className="mb-5 flex flex-col gap-5 pb-1 sm:flex-row sm:items-center sm:gap-5">
       <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
         Tax Optimisation
       </h1>
