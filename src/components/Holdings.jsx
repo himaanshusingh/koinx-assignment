@@ -18,7 +18,7 @@ const formatNumber = (value) =>
 const Holdings = () => {
   const [holdings, setHoldings] = useState([]);
   const [showAll, setShowAll] = useState(false);
-  const [sortOrder, setSortOrder] = useState("none"); // "none", "desc", "asc"
+  const [sortOrder, setSortOrder] = useState("none");
   const { selectedHoldings, toggleHolding } = useHarvesting();
 
   useEffect(() => {
