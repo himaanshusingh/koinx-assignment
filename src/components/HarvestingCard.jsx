@@ -131,13 +131,14 @@ const HarvestingSummaryCard = ({
       </div>
 
       {(showNote || displayNote) && (
-        <p className="mt-6 text-base text-white/90 sm:text-2xl animate-slide-down">
+        <p className="mt-6 text-sm text-white/90 sm:text-xl animate-slide-down">
           {displayNote ? note : pNote}
-          <span className="font-semibold ml-2">
+          <span className="font-bold ml-2">
             {formatCompactCurrency(displayNote ? noteValue : pNoteValue)}
           </span>
         </p>
       )}
+
 
     </div>
   );
