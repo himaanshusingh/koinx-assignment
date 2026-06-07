@@ -15,9 +15,13 @@ export const HarvestingProvider = ({ children }) => {
 
   const toggleHolding = (holding) => {
     setSelectedHoldings((prev) => {
-      const isSelected = prev.find((h) => h.coinName === holding.coinName && h.coin === holding.coin);
+      const isSelected = prev.find(
+        (h) => h.coinName === holding.coinName && h.coin === holding.coin,
+      );
       if (isSelected) {
-        return prev.filter((h) => !(h.coinName === holding.coinName && h.coin === holding.coin));
+        return prev.filter(
+          (h) => !(h.coinName === holding.coinName && h.coin === holding.coin),
+        );
       } else {
         return [...prev, holding];
       }
@@ -59,7 +63,10 @@ export const HarvestingProvider = ({ children }) => {
         ...initialState,
         netShort: initialState.profitsShort - initialState.lossesShort,
         netLong: initialState.profitsLong - initialState.lossesLong,
-        total: (initialState.profitsShort - initialState.lossesShort) + (initialState.profitsLong - initialState.lossesLong)
+        total:
+          initialState.profitsShort -
+          initialState.lossesShort +
+          (initialState.profitsLong - initialState.lossesLong),
       },
       after: {
         profitsShort: afterProfitsShort,
@@ -69,12 +76,10 @@ export const HarvestingProvider = ({ children }) => {
         netShort: netShort,
         netLong: netLong,
         total: netShort + netLong,
-        harvestedSavings: selectedSTCGLoss + selectedLTCGLoss
-      }
+        harvestedSavings: selectedSTCGLoss + selectedLTCGLoss,
+      },
     };
-
   }, [selectedHoldings]);
-
 
   return (
     <HarvestingContext.Provider
